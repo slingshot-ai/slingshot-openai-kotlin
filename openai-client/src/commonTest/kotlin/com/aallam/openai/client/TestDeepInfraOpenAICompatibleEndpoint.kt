@@ -30,7 +30,7 @@ private fun transport(config: OpenAIConfig? = null): HttpTransport {
 }
 
 abstract class TestDeepinfraOpenAICompatibleEndpoint {
-    internal val openAI = OpenAIApi(transport())
+    internal val deepInfra = OpenAIApi(transport())
 
     internal fun generateOpenAI(
         config: OpenAIConfig

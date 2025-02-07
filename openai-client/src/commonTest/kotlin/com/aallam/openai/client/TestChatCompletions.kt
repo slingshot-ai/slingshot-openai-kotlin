@@ -43,6 +43,27 @@ class TestChatCompletions : TestOpenAI() {
     }
 
     @Test
+    fun testStreamingChatCompletionsExceedingTokenLimit() = test {
+        val request = chatCompletionRequest {
+            model = ModelId("gpt-3.5-turbo")
+            messages {
+                message {
+                    role = ChatRole.User
+                    content = SystemFileSystem.source(
+                        testFilePath("text/two_character_screenplay.txt")
+                    ).buffered().readString()
+                }
+            }
+        }
+
+        val result = runCatching {
+            openAI.chatCompletions(request).collect { }
+        }
+
+        assert(result.exceptionOrNull() is InvalidRequestException)
+    }
+
+    @Test
     fun chatCompletions() = test {
         val request = chatCompletionRequest {
             model = ModelId("gpt-3.5-turbo")

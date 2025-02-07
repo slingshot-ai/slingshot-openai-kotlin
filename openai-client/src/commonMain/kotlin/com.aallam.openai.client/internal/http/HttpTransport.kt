@@ -53,6 +53,7 @@ internal class HttpTransport(private val httpClient: HttpClient) : HttpRequester
         is ClientRequestException -> openAIAPIException(e)
         is ServerResponseException -> handleServerResponseException(e)
         is HttpRequestTimeoutException, is SocketTimeoutException, is ConnectTimeoutException -> OpenAITimeoutException(e)
+        is InvalidRequestException -> e
         is IOException -> GenericIOException(e)
         else -> OpenAIHttpException(e)
     }
