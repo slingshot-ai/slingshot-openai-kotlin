@@ -18,6 +18,11 @@ public data class ChatMessage(
     @SerialName("role") public val role: ChatRole,
 
     /**
+     * Set in JSON schema output mode if the model refused the request and couldn't adhere to the schema.
+     */
+    @SerialName("string") public val refusal: String?
+
+    /**
      * The contents of the message.
      * **This is required for requests, and optional for responses**.
      */
