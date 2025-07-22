@@ -4,6 +4,7 @@ import com.aallam.openai.api.OpenAIDsl
 import com.aallam.openai.api.chat.internal.ContentSerializer
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.JsonNull.content
 import kotlin.jvm.JvmInline
 
 
@@ -20,13 +21,13 @@ public data class ChatMessage(
     /**
      * Set in JSON schema output mode if the model refused the request and couldn't adhere to the schema.
      */
-    @SerialName("string") public val refusal: String?
+    @SerialName("string") public val refusal: String?,
 
     /**
      * The contents of the message.
      * **This is required for requests, and optional for responses**.
      */
-    @SerialName("content") public val messageContent: Content? = null,
+    @SerialName("content") public val messageContent: Content? = null
 
     /**
      * The author's name of this message.
